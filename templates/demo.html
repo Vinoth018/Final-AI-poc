@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Reels Clone</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #FAFAFA;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+        }
+        header {
+            width: 100%;
+            background-color: #343a40;
+            padding: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+            text-align: center;
+            color: #0095F6;
+        }
+        .reel-container {
+            height: 730px;
+            width: 400px;
+            background-color: white;
+            border: 1px solid #DBDBDB;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            margin: 80px 0 20px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .reel-header {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            justify-content: space-between;
+        }
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #0095F6;
+        }
+        .user-info {
+            flex: 1;
+            margin-left: 10px;
+        }
+        .username {
+            font-weight: 500;
+        }
+        .follow-button {
+            background-color: #0095F6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s, border 0.3s;
+        }
+        .followed {
+            background-color: white !important;
+            color: #0095F6 !important;
+            border: 2px solid #0095F6 !important;
+        }
+        .follow-button:hover {
+            background-color: #007BB5;
+        }
+        .reel-actions {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+        }
+        .action-icon {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .action-icon:hover {
+            transform: scale(1.2);
+        }
+        .comments-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+            border-top: 1px solid #DBDBDB;
+            background: #F9F9F9;
+            display: none;
+        }
+        .comment-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        .comment-item img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .add-comment {
+            display: flex;
+            border-top: 1px solid #DBDBDB;
+            padding: 10px;
+            background: white;
+        }
+        .add-comment input {
+            width: 85%;
+            border: none;
+            outline: none;
+            padding: 5px;
+            font-size: 14px;
+        }
+        .add-comment button {
+            border: none;
+            background: none;
+            color: #0095F6;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .footer-icons {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            background-color: white;
+            position: absolute;
+            bottom: 0;
+            border-top: 1px solid #DBDBDB;
+        }
+        .footer-icons i {
+            font-size: 24px;
+            cursor: pointer;
+            margin-left: -22px;
+        }
+        footer {
+            width: 100%;
+            background-color: #343a40;
+            padding: 10px;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            bottom: 0;
+            z-index: 1000;
+            text-align: center;
+        }
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+        .caption {
+            padding-bottom: 8px;
+            padding-right: 5px;
+        }
+        .likes {
+            padding-bottom: 5px;
+        }
+        .heading {
+            margin-top: -45px;
+        }
+        .company-pic {
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-left: 10px;
+        }
+        .video-container {
+            width: 100%;
+            height: 400px;
+            background-color: black;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+        }            
+        .translated-text {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.7); /* Slightly darker for better visibility */
+        padding: 8px 16px; /* Increase padding to ensure the first and last words are fully visible */
+        border-radius: 5px;
+        font-size: 16px;
+        line-height: 20px;
+        display: flex;
+        justify-content: center;
+        white-space: normal; /* Allow text to wrap */
+        overflow: visible; /* Ensure no words are clipped */
+        text-overflow: ellipsis;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        word-break: break-word; /* Allows long words to wrap to the next line */
+        max-width: 90%; /* Keep the captions centered and not too wide */
+    }
+    </style>
+</head>
+<body>
+    <header style="height: 55px;">
+        <img src="{{ url_for('static', filename='images/Twilight.png') }}" class="company-pic" alt="Profile Picture">
+        <h1 class="heading">Subtitles Generator</h1>
+    </header>
+    <div class="reel-container">
+        <div class="reel-header">
+            <img src="{{ url_for('static', filename='images/profile.PNG') }}" class="profile-pic" alt="Profile Picture">
+            <div class="user-info">
+                <span class="username">vinoth_0108</span>
+            </div>
+            <button class="follow-button" onclick="toggleFollow(this)">Follow</button>
+            <button style="background-color: transparent; border: none; cursor: pointer; color: black;"><i class="fa-solid fa-ellipsis"></i></button>
+        </div>
+        <div class="video-container">
+            <video id="video" width="100%" height="100%" autoplay loop muted controls>
+                <source src="{{ url_for('static', filename=video_path) }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div id="caption" class="translated-text">Loading captions...</div> 
+        </div>
+        <div class="reel-actions">
+            <div class="left-actions">
+                <img src="https://img.icons8.com/ios/24/000000/like--v1.png" class="action-icon" alt="Like" onclick="toggleLike(this)">
+                <img style="" src="https://img.icons8.com/ios/24/000000/speech-bubble.png" class="action-icon" alt="Comment" onclick="toggleComments()">
+                <img src="https://img.icons8.com/ios/24/000000/paper-plane.png" class="action-icon" alt="Share">
+            </div>
+            <img src="https://img.icons8.com/ios/24/000000/bookmark.png" class="action-icon" alt="Save">
+        </div>
+        <div class="likes">
+            <span style="padding-left: 7px;"><strong>123 likes</strong></span>
+        </div>
+        <div class="caption">
+            <span style="padding-left: 7px; padding-bottom: 15px;"><strong>vinoth_0108</strong> Translating speech to multiple languages!</span>
+        </div>
+        <div class="comments-container" id="commentsContainer">
+            <h4>Comments</h4>
+            <div id="commentList"></div>
+        </div>
+        <div class="add-comment" id="addCommentSection">
+            <input type="text" id="commentInput" placeholder="Add a comment...">
+            <button onclick="postComment()">Post</button>
+        </div>
+        <div class="footer-icons">
+            <i class="fa-solid fa-house"></i>
+            <i class="fas fa-search"></i>
+            <i class="fa-regular fa-square-plus"></i>
+            <i><img style="height: 25px; width: 28px;" src="{{ url_for('static', filename='images/reels.png') }}" alt="Profile Picture"></i>
+            <i><img style="height: 25px; width: 28px;" src="{{ url_for('static', filename='images/profile.PNG') }}" alt="Profile Picture"></i>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Social Media | Proof of Concept</p>
+    </footer>
+</body>
+<script>
+    function toggleComments() {
+        const commentsContainer = document.getElementById('commentsContainer');
+        commentsContainer.style.display = commentsContainer.style.display === 'none' ? 'block' : 'none';
+    }
+    function toggleLike(icon) {
+    if (icon.src.includes("like--v1.png")) {
+        icon.src = "https://img.icons8.com/ios-filled/50/fa314a/like.png";
+    } else {
+        icon.src = "https://img.icons8.com/ios/50/000000/like--v1.png";
+    }
+    }
+    function toggleFollow(button) {
+        if (button.innerText === 'Follow') {
+            button.innerText = 'Following';
+            button.classList.add('followed');
+        } else {
+            button.innerText = 'Follow';
+            button.classList.remove('followed');
+        }
+    }
+    function postComment() {
+        const commentInput = document.getElementById('commentInput');
+        const commentList = document.getElementById('commentList');
+        const commentItem = document.createElement('div');
+        commentItem.classList.add('comment-item');
+        commentItem.innerHTML = `
+            <img src="{{ url_for('static', filename='images/profile.PNG') }}" alt="Profile Picture">
+            <p><strong>vinoth_0108</strong> ${commentInput.value}</p>
+        `;
+        commentList.appendChild(commentItem);
+        commentInput.value = '';
+    }
+    const video = document.getElementById('video');
+        const caption = document.getElementById('caption');
+        // Dynamically load captions from Flask context
+        const captions = {{ captions|tojson }};  // Flask will inject the translated captions here.
+        // Function to update captions
+        video.addEventListener('timeupdate', () => {
+            const currentTime = video.currentTime;
+            const currentCaption = captions.find(caption => currentTime >= caption.start && currentTime <= caption.end);
+            if (currentCaption) {
+                caption.textContent = currentCaption.text;
+                caption.style.opacity = 1; // Show caption
+            } else {
+                caption.style.opacity = 0; // Hide caption
+            }
+        });
+</script>
+
+</body>
+</html> 
+
+

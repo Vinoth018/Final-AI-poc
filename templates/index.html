@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POC</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: #343a40;
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            color: white;
+        }
+
+        .header img {
+            height: 50px;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            margin-right: 20px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        /* Content Styles */
+        .content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('{{ url_for('static', filename='images/background.jpg') }}') no-repeat center center;
+            background-size: cover;
+            padding: 20px;
+        }
+
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            text-align: center;
+            color: #343a40;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: #343a40;
+        }
+
+        .form-control {
+            border-radius: 30px;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ced4da;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-radius: 30px;
+            padding: 10px 15px;
+            font-size: 16px;
+            width: 100%;
+            border: none;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+
+            .form-container {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <div><img src="{{ url_for('static', filename='images/Twilight.png') }}" alt="Twilight"></div>
+            <div class="navbar">
+                <a href="/">Subtitles</a>
+                <a href=""> | </a>
+                <a href="/">Language Translation</a>
+                <a href=""> | </a>
+                <a href="/">Voice cloning</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="content">
+        <div class="form-container">
+            <h3>Video Upload for Subtitles</h3>
+            <form method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="video">Upload Video</label>
+                    <input type="file" name="video" class="form-control" accept="video/*" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="language">Select Language</label>
+                    <select name="language" class="form-control" required>
+                        {% for code, name in languages.items() %}
+                            <option value="{{ code }}">{{ name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Process</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Social Media | Proof of Concept</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POC</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: #343a40;
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            color: white;
+        }
+
+        .header img {
+            height: 50px;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            margin-right: 20px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        /* New Content Styles */
+        .content {
+            flex: 1;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            background: url('{{ url_for('static', filename='images/background.jpg') }}') no-repeat center center;
+            background-size: cover;
+            padding: 20px;
+        }
+
+        .card-container {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card {
+            width: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #343a40;
+        }
+
+        .card-text {
+            color: #6c757d;
+            margin-bottom: 15px;
+        }
+
+        .btn-outline-primary {
+            border-radius: 30px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+
+            .card {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <div><img src="{{ url_for('static', filename='images/Twilight.png') }}" alt="Twilight"></div>
+            <div class="navbar">
+                <a href="/">Subtitles</a>
+                <a href=""> | </a>
+                <a href="/">Language Translation</a>
+                <a href=""> | </a>
+                <a href="/">Voice Cloning</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="content">
+        <div class="card-container">
+
+
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/add.jpg') }}" alt="Translation">
+                <div class="card-body">
+                    <h5 class="card-title">Advertisement Creator</h5>
+                    <p class="card-text">Create Advertisement of any product seamlessly.</p>
+                    <a href="/" class="btn btn-outline-primary">Get Started</a>
+                </div>
+            </div>
+
+
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/subtitles.jpg') }}" alt="Subtitles">
+                <div class="card-body">
+                    <h5 class="card-title">Speech to Speech</h5>
+                    <p class="card-text">Translate and generate subtitles in your preferred language.</p>
+                    <a href="{{ url_for('index') }}" class="btn btn-outline-primary">Get Started</a>
+                </div>
+            </div>
+            
+
+
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/voice-cloning.jpeg') }}" alt="Voice Cloning">
+                <div class="card-body">
+                    <h5 class="card-title">Voice Cloning</h5>
+                    <p class="card-text">Clone your voice for personalized audio content.</p>
+                    <a href="/" class="btn btn-outline-primary">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Social Media | Proof of Concept</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+
+</html>
