@@ -1,4 +1,4 @@
-<!doctype html>
+<!-- <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -166,3 +166,224 @@
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 </body>
 </html>
+
+
+
+ -->
+
+
+
+
+
+
+
+ <!doctype html>
+ <html lang="en">
+ 
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>POC</title>
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+     <style>
+         body, html {
+             height: 100%;
+             margin: 0;
+             font-family: 'Arial', sans-serif;
+             background-color: #f5f5f5;
+             display: flex;
+             flex-direction: column;
+         }
+ 
+         .header {
+             background-color: #222;
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+             padding: 15px;
+             color: white;
+         }
+ 
+         .header img {
+             height: 50px;
+         }
+ 
+         .navbar a {
+             color: white;
+             margin-right: 20px;
+             text-decoration: none;
+         }
+ 
+         footer {
+             background-color: #222;
+             color: white;
+             text-align: center;
+             padding: 15px;
+             width: 100%;
+             position: fixed;
+             bottom: 0;
+         }
+ 
+         .content {
+             flex: 1;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             padding: 50px;
+         }
+ 
+         .form-container {
+             background-color: white;
+             padding: 40px;
+             border-radius: 20px;
+             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+             width: 400px;
+             position: relative;
+             overflow: hidden;
+         }
+ 
+         .form-container::before {
+             content: "";
+             position: absolute;
+             top: -50px;
+             left: -50px;
+             width: 200px;
+             height: 200px;
+             background-color: #007bff;
+             border-radius: 50%;
+             opacity: 0.2;
+         }
+ 
+         .form-header {
+             text-align: center;
+             margin-bottom: 30px;
+         }
+ 
+         .form-header h3 {
+             margin: 0;
+             font-weight: bold;
+             color: #343a40;
+         }
+ 
+         .form-group {
+             margin-bottom: 20px;
+             position: relative;
+         }
+ 
+         .form-group i {
+             position: absolute;
+             left: 15px;
+             top: 50%;
+             transform: translateY(-50%);
+             color: #007bff;
+             font-size: 18px;
+         }
+ 
+         .form-control {
+             width: 100%;
+             padding: 10px 15px 10px 40px;
+             border-radius: 25px;
+             border: 1px solid #ced4da;
+             transition: all 0.3s ease;
+         }
+ 
+         .form-control:focus {
+             border-color: #007bff;
+             box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+         }
+ 
+         /* Customize the file input to make it smaller */
+         input[type="file"] {
+             /* padding: 5px; */
+             padding-left: 45px;
+             padding-top: 5px;
+             padding-bottom: 5px;
+             font-size: 14px;
+             border-radius: 15px;
+             border: 1px solid #ced4da;
+             width: 100%;
+             cursor: pointer;
+             transition: all 0.3s ease;
+         }
+ 
+         input[type="file"]:hover {
+             border-color: #007bff;
+             box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+         }
+ 
+         .btn-submit {
+             background-color: #007bff;
+             color: white;
+             border: none;
+             padding: 12px;
+             width: 100%;
+             border-radius: 25px;
+             font-size: 16px;
+             transition: background-color 0.3s ease;
+         }
+ 
+         .btn-submit:hover {
+             background-color: #0056b3;
+         }
+ 
+         @media (max-width: 768px) {
+             .content {
+                 padding: 20px;
+             }
+ 
+             .form-container {
+                 width: 100%;
+             }
+         }
+     </style>
+ </head>
+ 
+ <body>
+     <header>
+         <div class="header">
+             <img src="{{ url_for('static', filename='images/Twilight.png') }}" alt="Twilight">
+             <nav class="navbar">
+                 <a href="/">Subtitles</a>
+                 <a href="/">Language Translation</a>
+                 <a href="/">Voice Cloning</a>
+             </nav>
+         </div>
+     </header>
+ 
+     <main class="content">
+         <div class="form-container">
+             <div class="form-header">
+                 <h3>Upload Your Video</h3>
+             </div>
+             <form method="POST" enctype="multipart/form-data">
+                 <div class="form-group">
+                     <i class="fas fa-video"></i>
+                     <input type="file" name="video" accept="video/*" required>
+                 </div>
+ 
+                 <div class="form-group">
+                     <i class="fas fa-language"></i>
+                     <select name="language" class="form-control" required>
+                         {% for code, name in languages.items() %}
+                             <option value="{{ code }}">{{ name }}</option>
+                         {% endfor %}
+                     </select>
+                 </div>
+ 
+                 <button type="submit" class="btn-submit">Generate Subtitles</button>
+             </form>
+         </div>
+     </main>
+ 
+     <footer>
+         <p>&copy; 2024 Social Media | Proof of Concept</p>
+     </footer>
+ 
+     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+ </body>
+ 
+ </html>
+ 
